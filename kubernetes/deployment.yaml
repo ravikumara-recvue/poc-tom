@@ -1,0 +1,28 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ml-tomcat-green
+  labels:
+    app: ml-tomcat-green
+    owner: maplelabs
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ml-tomcat-green
+      owner: maplelabs
+  template:
+    metadata:
+      labels:
+        app: ml-tomcat-green
+        owner: maplelabs
+    spec:
+      containers:
+      - name: ml-tomcat-green
+        image: ravikumarp/ml-tomcat:green
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+      imagePullSecrets:
+      - name: kube-secret
